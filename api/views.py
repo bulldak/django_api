@@ -11,21 +11,23 @@ from django.http import JsonResponse
 import json
 
 # Create your views here.
-
+@csrf_exempt
 def Place_info_list(request):
     if request.method == 'GET':
         query_set = Place_info.objects.all()
         serializer = Place_infoSerializer(query_set, many=True)
         return JsonResponse(serializer.data, safe=False)
-    
+
+@csrf_exempt   
 def Place_info_view(request, pk):
     Place_obj = Place_info.objects.get(pk = pk)
     if request.method == 'GET':
         serializer = Place_infoSerializer(Place_obj)
         return JsonResponse(serializer.data, safe=False)
-    
+
+@csrf_exempt    
 def plan_priview(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
         data = JSONParser().parse(request)
         startdate = dt.datetime.strptime(data['startdate'], '%Y-%m-%d')
         enddate = dt.datetime.strptime(data['enddate'], '%Y-%m-%d')
