@@ -29,31 +29,33 @@ def Place_info_view(request, pk):
 def plan_priview(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
-        startdate = dt.datetime.strptime(data['startdate'], '%Y-%m-%d')
-        enddate = dt.datetime.strptime(data['enddate'], '%Y-%m-%d')
+        startdate = dt.datetime.strptime(data['startdate'], '%Y. %m. %d.')
+        enddate = dt.datetime.strptime(data['enddate'], '%Y. %m. %d.')
+        themes = data["themes"]
+        
         datenum = (enddate - startdate).days
         
         q=Q()
         q &= Q(category = "c1")
-        if data['experience'] == 1:
+        if "체험" in themes:
             q &= Q(experience = 1)
-        if data['activity'] == 1:
+        if "액티비티" in themes:
             q &= Q(activity = 1)
-        if data['nature'] == 1:
+        if "자연" in themes:
             q &= Q(nature = 1)
-        if data['beach'] == 1:
+        if "해변" in themes:
             q &= Q(beach = 1)
-        if data['rest'] == 1:
+        if "휴식" in themes:
             q &= Q(rest = 1)
-        if data['photo'] == 1:
+        if "포토스팟" in themes:
             q &= Q(photo = 1)
-        if data['parents'] == 1:
+        if "부모님" in data["with"]:
             q &= Q(parents = 1)
-        if data['children'] == 1:
+        if "아이" in data["with"]:
             q &= Q(children = 1)
-        if data['couples'] == 1:
+        if "커플" in data["with"]:
             q &= Q(couples = 1)
-        if data['friends'] == 1:
+        if "친구" in data["with"]:
             q &= Q(friends = 1)
         
         placefilter = Place_keywords.objects.filter(q)
@@ -66,10 +68,6 @@ def plan_priview(request):
         }
         for p in range(0, 3):
             
-            plan_json = {
-                "place": []
-            }
-            response_data["plan"].append(plan_json)
             placelist = []
             for i in range(0, (datenum+1)*3):
                 while True:
@@ -82,11 +80,9 @@ def plan_priview(request):
                         continue
                     else:
                         placelist.append(place)
-                        place_json = {
-                            "id": place
-                        }
-                        response_data["plan"][p]["place"].append(place_json)
                         break
+                    
+            response_data["plan"].append(placelist)
             
        
                  
