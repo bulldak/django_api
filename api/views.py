@@ -35,6 +35,10 @@ def plan_priview(request):
         
         datenum = (enddate - startdate).days
         
+        with_data = data["with"]
+        if with_data == None:
+            with_data = ""
+            
         q=Q()
         q &= Q(category = "c1")
         if "체험" in themes:
@@ -49,13 +53,13 @@ def plan_priview(request):
             q &= Q(rest = 1)
         if "포토스팟" in themes:
             q &= Q(photo = 1)
-        if "부모님" in data["with"]:
+        if "부모님" in with_data:
             q &= Q(parents = 1)
-        if "아이" in data["with"]:
+        if "아이" in with_data:
             q &= Q(children = 1)
-        if "커플" in data["with"]:
+        if "커플" in with_data:
             q &= Q(couples = 1)
-        if "친구" in data["with"]:
+        if "친구" in with_data:
             q &= Q(friends = 1)
         
         placefilter = Place_keywords.objects.filter(q)
