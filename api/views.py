@@ -29,8 +29,8 @@ def Place_info_view(request, pk):
 def plan_priview(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
-        startdate = dt.datetime.strptime(data['startdate'], '%Y. %m. %d.')
-        enddate = dt.datetime.strptime(data['enddate'], '%Y. %m. %d.')
+        startdate = dt.datetime.strptime(data['startDate'], "%Y. %m. %d.")
+        enddate = dt.datetime.strptime(data['endDate'], '%Y. %m. %d.')
         themes = data["themes"]
         
         datenum = (enddate - startdate).days
