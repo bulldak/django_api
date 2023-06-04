@@ -21,8 +21,8 @@ from api import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('plan_preview/', views.plan_priview),
-    path('plan_preview', views.plan_priview),
+    path('plan/', views.plan_maker),
+    path('plan', views.plan_maker),
     path('place_info/', views.Place_info_list),
     path('place_info', views.Place_info_list),
     path('place_info/<str:pk>', views.Place_info_view)
