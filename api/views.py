@@ -122,7 +122,7 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
                 doc_temp["routes"][0]["summary"]["destination"]['name'] = last_end_place["title"]
                 doc.append(doc_temp)
                 choose_list.append(last_end_place)
-                choose_list_place.append(last_end_place["kakaoid"])
+                choose_list_place.append(last_end_place)
                 del sort2_place[random_num]
                 del sort_place[random_num]
                 break
@@ -165,7 +165,7 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
                         doc_temp["routes"][0]["summary"]["destination"]['name'] = last_end_place["title"]                       
                         doc.append(doc_temp)
                         choose_list.append(last_end_place)
-                        choose_list_place.append(last_end_place["kakaoid"])
+                        choose_list_place.append(last_end_place)
                         del sort2_place[random_num]
                         del sort_place[random_num]
                         last_num -= 1
@@ -198,7 +198,7 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
                         doc_temp["routes"][0]["summary"]["destination"]['name'] = last_end_place["title"]
                         doc.append(doc_temp)
                         choose_list.append(last_end_place)
-                        choose_list_place.append(last_end_place["kakaoid"])
+                        choose_list_place.append(last_end_place)
 
                         del sort_place[random_num]
             
@@ -291,7 +291,7 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
                     doc_temp["routes"][0]["summary"]["destination"]['name'] = last_end_place["title"]
                     doc.append(doc_temp)
                     choose_list.append(last_end_place)
-                    choose_list_place.append(last_end_place["kakaoid"])
+                    choose_list_place.append(last_end_place)
                     del sort2_place[random_num]
                     del sort_place[random_num]
                     last_num -= 1
@@ -323,7 +323,7 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
                     doc_temp["routes"][0]["summary"]["destination"]['name'] = last_end_place["title"]
                     doc.append(doc_temp)
                     choose_list.append(last_end_place)
-                    choose_list_place.append(last_end_place["kakaoid"])
+                    choose_list_place.append(last_end_place)
 
                     del sort_place[random_num]
                     continue
@@ -437,6 +437,8 @@ def plan_maker(request):
         enddate = dt.datetime.strptime(data['endDate'], '%Y. %m. %d.')
         themes = data["themes"]
         with_data = data["with"]
+        if with_data == None:
+            with_data = ""
         user = ""
         is_first_tag = True
         if "체험" in themes:
