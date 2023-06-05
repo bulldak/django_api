@@ -25,5 +25,8 @@ urlpatterns = [
     path('plan', views.plan_maker),
     path('place_info/', views.Place_info_list),
     path('place_info', views.Place_info_list),
-    path('place_info/<str:pk>', views.Place_info_view)
+    path('place_info/<str:pk>', views.Place_info_view),
+    path('place_info/<str:pk>/', views.Place_info_view),
+    path('map/<int:routenum>/<int:daynum>', views.map_maker),
+    path('map/<int:routenum>/<int:daynum>/', views.map_maker)
 ]

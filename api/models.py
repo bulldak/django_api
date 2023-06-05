@@ -31,13 +31,10 @@ class Place_keywords(models.Model):
     friends = models.IntegerField()
 
 class Plan(models.Model):
-    planid = models.IntegerField()
-    startdate = models.DateField()
-    enddate = models.DateField()
-    starttime = models.IntegerField()
-    endtime = models.IntegerField()
+    Planid = models.IntegerField(primary_key=True)
+    Plandata = models.TextField()
 
-class Plan_detail(models.Model):
-    planid = models.IntegerField()
-    seq = models.IntegerField()
-    kakaoid = models.TextField()
+# class Plan_detail(models.Model):
+#     planid = models.IntegerField()
+#     seq = models.IntegerField()
+#     kakaoid = models.TextField()
