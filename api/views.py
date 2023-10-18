@@ -228,6 +228,7 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
                     dist = cal_dist(last_end_place["latitude"], last_end_place["longitude"], sort_restaurant[n]["latitude"],sort_restaurant[n]["longitude"])
                 if dist >= 1 and dist <= 10:
                     lunch_n_temp.append(n)
+                    end_place = sort_restaurant[n]
                     if dist <= min:
                         min = dist
                         end_place = sort_restaurant[n]
