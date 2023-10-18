@@ -140,10 +140,10 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
         while True:
             random_num = random.randint(0,last_num)
                  
-            if loop_num < 50:
+            if loop_num < 20:
                 loop_num += 1
                 dist = cal_dist(last_end_place["latitude"], last_end_place["longitude"], sort2_place[random_num]["latitude"],sort2_place[random_num]["longitude"])
-                if dist >= 1 and dist <= 10:
+                if dist >= 1 and dist <= 15:
                     end_place = sort2_place[random_num]
 
                     #마지막으로 이동했던 장소와 다음 이동할 장소의 이동정보 url
@@ -173,9 +173,9 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
                         continue
             #50번 찾아도 없음
             else:
-                random_num = random.randint(100,300)
+                random_num = random.randint(100,400)
                 dist = cal_dist(last_end_place["latitude"], last_end_place["longitude"], sort_place[random_num]["latitude"],sort_place[random_num]["longitude"])
-                if dist >= 1 and dist <= 10:
+                if dist >= 1 and dist <= 15:
                     end_place = sort_place[random_num]
                             
                     #마지막으로 이동했던 장소와 다음 이동할 장소의 이동정보 url
@@ -280,10 +280,10 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
     while True:
         random_num = random.randint(0,last_num)
         
-        if loop_num < 50:
+        if loop_num < 20:
             loop_num += 1
             dist = cal_dist(last_end_place["latitude"], last_end_place["longitude"], sort2_place[random_num]["latitude"],sort2_place[random_num]["longitude"])
-            if dist >= 1 and dist <= 10:
+            if dist >= 1 and dist <= 15:
                 end_place = sort2_place[random_num]
                 
                 #마지막으로 이동했던 장소와 다음 이동할 장소의 이동정보 url
@@ -313,9 +313,9 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
                     continue
         #50번 찾아도 없음
         else:
-            random_num = random.randint(100,300)
+            random_num = random.randint(100,400)
             dist = cal_dist(last_end_place["latitude"], last_end_place["longitude"], sort_place[random_num]["latitude"],sort_place[random_num]["longitude"])
-            if dist >= 1 and dist <= 10:
+            if dist >= 1 and dist <= 15:
                 end_place = sort_place[random_num]            
                         
                 #마지막으로 이동했던 장소와 다음 이동할 장소의 이동정보 url
