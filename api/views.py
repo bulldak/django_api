@@ -238,20 +238,20 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
             if start_airport_type:
                 doc_temp["routes"][0]["summary"]["origin"]['name'] = airport_data["title"]
                 choose_list.append(airport_data)
-			else:
-				first_query_set = Place_info.objects.filter(kakaoid = start_id)
+            else:
+                first_query_set = Place_info.objects.filter(kakaoid = start_id)
                 first_serializer = Place_infoSerializer(first_query_set, many=True)
                 first_data = first_serializer.data
                 doc_temp["routes"][0]["summary"]["origin"]['name'] = first_data[0]["title"]
                 choose_list.append(first_data[0])
-	    	# GET을 이용하여 정보 불러오기
+	    # GET을 이용하여 정보 불러오기
             res = requests.get(url, headers=headers)
             doc_temp = json.loads(res.text)
-	    last_end_place = end_place
-	    doc_temp["routes"][0]["summary"]["destination"]['name'] = last_end_place["title"]
-	    doc.append(doc_temp)
-	    del sort_restaurant[num]
-	    choose_list.append(last_end_place)
+            last_end_place = end_place
+            doc_temp["routes"][0]["summary"]["destination"]['name'] = last_end_place["title"]
+            doc.append(doc_temp)
+            del sort_restaurant[num]
+            choose_list.append(last_end_place)
         else:
             url = "https://apis-navi.kakaomobility.com/v1/directions?origin={0},{1}&destination={2},{3}".format(last_end_place["longitude"],last_end_place["latitude"],sort_restaurant[num]["longitude"], sort_restaurant[num]["latitude"]) + "&waypoints=&priority=RECOMMEND&car_fuel=GASOLINE&car_hipass=false&alternatives=false&road_details=false"            
             # GET을 이용하여 정보 불러오기
