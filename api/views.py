@@ -514,7 +514,7 @@ def plan_maker(request):
         morining_time = 0
         start_time = 0
         total_time = 0
-        morining_type = True
+        morning_time = True
         lunch_type = True
         night_type = True
         dinner_type = True
