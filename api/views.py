@@ -139,11 +139,11 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
         last_num = len(sort2_place) - 1
         while True:
             random_num = random.randint(0,last_num)
-                 
+            #random_num_temp = random.sample(range(0,99),)     
             if loop_num < 20:
                 loop_num += 1
                 dist = cal_dist(last_end_place["latitude"], last_end_place["longitude"], sort2_place[random_num]["latitude"],sort2_place[random_num]["longitude"])
-                if dist >= 1 and dist <= 15:
+                if dist >= 1 and dist <= 20:
                     end_place = sort2_place[random_num]
 
                     #마지막으로 이동했던 장소와 다음 이동할 장소의 이동정보 url
@@ -175,7 +175,7 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
             else:
                 random_num = random.randint(100,400)
                 dist = cal_dist(last_end_place["latitude"], last_end_place["longitude"], sort_place[random_num]["latitude"],sort_place[random_num]["longitude"])
-                if dist >= 1 and dist <= 15:
+                if dist >= 1 and dist <= 20:
                     end_place = sort_place[random_num]
                             
                     #마지막으로 이동했던 장소와 다음 이동할 장소의 이동정보 url
@@ -222,7 +222,10 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
                 del sort_restaurant[n]
                 last_num -= 1
             else:
-                dist = cal_dist(last_end_place["latitude"], last_end_place["longitude"], sort_restaurant[n]["latitude"],sort_restaurant[n]["longitude"])
+                if (morining_type == False):
+                    dist = cal_dist(start_latitude, start_longitude, sort_restaurant[n]["latitude"],sort_restaurant[n]["longitude"])
+                else:
+                    dist = cal_dist(last_end_place["latitude"], last_end_place["longitude"], sort_restaurant[n]["latitude"],sort_restaurant[n]["longitude"])
                 if dist >= 1 and dist <= 10:
                     lunch_n_temp.append(n)
                     if dist <= min:
@@ -233,8 +236,11 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
             
         #마지막으로 이동했던 장소와 다음 이동할 장소의 이동정보 url
         #점심이 처음이면 시작점은 스타트포인트
-        if (morining_type == False) and (lunch_type == False):
+        if (morining_type == False):
             url = "https://apis-navi.kakaomobility.com/v1/directions?origin={0},{1}&destination={2},{3}".format(start_longitude,start_latitude,sort_restaurant[num]["longitude"], sort_restaurant[num]["latitude"]) + "&waypoints=&priority=RECOMMEND&car_fuel=GASOLINE&car_hipass=false&alternatives=false&road_details=false"            
+            res = requests.get(url, headers=headers)
+            doc_temp = json.loads(res.text)
+
             if start_airport_type:
                 doc_temp["routes"][0]["summary"]["origin"]['name'] = airport_data["title"]
                 choose_list.append(airport_data)
@@ -245,8 +251,7 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
                 doc_temp["routes"][0]["summary"]["origin"]['name'] = first_data[0]["title"]
                 choose_list.append(first_data[0])
 	    # GET을 이용하여 정보 불러오기
-            res = requests.get(url, headers=headers)
-            doc_temp = json.loads(res.text)
+            
             last_end_place = end_place
             doc_temp["routes"][0]["summary"]["destination"]['name'] = last_end_place["title"]
             doc.append(doc_temp)
@@ -283,7 +288,7 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
         if loop_num < 20:
             loop_num += 1
             dist = cal_dist(last_end_place["latitude"], last_end_place["longitude"], sort2_place[random_num]["latitude"],sort2_place[random_num]["longitude"])
-            if dist >= 1 and dist <= 15:
+            if dist >= 1 and dist <= 20:
                 end_place = sort2_place[random_num]
                 
                 #마지막으로 이동했던 장소와 다음 이동할 장소의 이동정보 url
@@ -315,7 +320,7 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
         else:
             random_num = random.randint(100,400)
             dist = cal_dist(last_end_place["latitude"], last_end_place["longitude"], sort_place[random_num]["latitude"],sort_place[random_num]["longitude"])
-            if dist >= 1 and dist <= 15:
+            if dist >= 1 and dist <= 20:
                 end_place = sort_place[random_num]            
                         
                 #마지막으로 이동했던 장소와 다음 이동할 장소의 이동정보 url
@@ -511,7 +516,7 @@ def plan_maker(request):
         datenum = (enddate - startdate).days
         
         lunch_time = 12
-        morining_time = 0
+        morning_time = 0
         start_time = 0
         total_time = 0
         morning_time = True
