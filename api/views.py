@@ -238,8 +238,8 @@ def dailyroutemake(sort_place, start_longitude, start_latitude, morining_type, l
             if start_airport_type:
                 doc_temp["routes"][0]["summary"]["origin"]['name'] = airport_data["title"]
                 choose_list.append(airport_data)
-	    	else:
-	        	first_query_set = Place_info.objects.filter(kakaoid = start_id)
+			else:
+				first_query_set = Place_info.objects.filter(kakaoid = start_id)
                 first_serializer = Place_infoSerializer(first_query_set, many=True)
                 first_data = first_serializer.data
                 doc_temp["routes"][0]["summary"]["origin"]['name'] = first_data[0]["title"]
